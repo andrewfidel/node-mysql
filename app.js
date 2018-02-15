@@ -1,4 +1,6 @@
 var myfaker = require('faker');//refers to faker package
+var mysql = require('mysql');
+
 
 // console.log(myfaker.address.city());
 
