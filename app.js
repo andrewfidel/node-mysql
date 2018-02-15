@@ -9,8 +9,19 @@ var connection = mysql.createConnection({
 });
 //creates connection to db
 
-var query = 'SELECT 1+5 AS answer';
-connection.query(query, function(error, results, fields) {
+//SELECTING number of users
+// var query = 'SELECT COUNT(*) AS total FROM users';
+// connection.query(query, function(error, results, fields) {
+//   if (error) throw error;
+//   console.log(results);
+// });
+//
+// connection.end();
+
+//INSERTING users dynamically using Faker random generator 
+var person = {email: myfaker.internet.email() };
+//transforms in INSERT INTO users (email) VALUES ('email_name');
+connection.query('INSERT INTO users SET ?', person, function(error, results) {
   if (error) throw error;
   console.log(results);
 });
