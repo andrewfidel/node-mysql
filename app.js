@@ -18,10 +18,31 @@ var connection = mysql.createConnection({
 //
 // connection.end();
 
-//INSERTING users dynamically using Faker random generator 
-var person = {email: myfaker.internet.email() };
+// //INSERTING users dynamically using Faker random generator
+// var person = {
+//   email: myfaker.internet.email()
+//   created_at: myfaker.date.past()
+// };
+// //transforms in INSERT INTO users (email) VALUES ('email_name');
+// connection.query('INSERT INTO users SET ?', person, function(error, results) {
+//   if (error) throw error;
+//   console.log(results);
+// });
+//
+// connection.end();
+
+//INSERTING 500 users dynamically into users
+var data = [];
+for (var i = 0; i < 500; i++) {
+  data.push([
+    myfaker.internet.email(),
+    myfaker.date.past()
+  ]);
+}
+
+var q = 'INSERT INTO users (email, created_at) VALUES ?'
 //transforms in INSERT INTO users (email) VALUES ('email_name');
-connection.query('INSERT INTO users SET ?', person, function(error, results) {
+connection.query(q, [data], function(error, results) {
   if (error) throw error;
   console.log(results);
 });
